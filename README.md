@@ -8,18 +8,20 @@ $ open https://git-scm.com
 
 ## Tutorial
 
+Создаем переменные окружения и псевдоним функции
+
 ```sh
 $ export GITHUB_USERNAME=<имя_пользователя>
 $ export GITHUB_EMAIL=<адрес_почтового_ящика>
 $ export GITHUB_TOKEN=<сгенирированный_токен>
 $ alias edit=<nano|vi|vim|subl>
 ```
-
+Переходим в директорию и выполняем скрипт
 ```sh
 $ cd ${GITHUB_USERNAME}/workspace
 $ source scripts/activate
 ```
-
+Создаем католог в домашней папке, создаем файл и записываем в него элементы конфигурации, затем устанавливаем её
 ```sh
 $ mkdir ~/.config
 $ cat > ~/.config/hub <<EOF
@@ -30,16 +32,38 @@ github.com:
 EOF
 $ git config --global hub.protocol https
 ```
-
+Создаем папку и в ней инициализирусем git
 ```sh
 $ mkdir projects/lab02 && cd projects/lab02
 $ git init
+```
+```sh
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint:  git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint:  git branch -m <name>
+Initialized empty Git repository in /home/amir/ziatdinovamir/workspace/.git/
+```
+Устанавливаем конфигурацию, используя заранее созданный конфиг
+```sh
 $ git config --global user.name ${GITHUB_USERNAME}
 $ git config --global user.email ${GITHUB_EMAIL}
 # check your git global settings
 $ git config -e --global
+```
+Привязываем удаленный репозиторий к локальному с именем origin и совмещаем их
+```sh
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab02.git
 $ git pull origin master
+```
+Добавляем файл, смотрим изменения, добавляем изменения в индекс, комитим и отправляем на удаленный репозиторий
+```sh
 $ touch README.md
 $ git status
 $ git add README.md
@@ -47,25 +71,36 @@ $ git commit -m"added README.md"
 $ git push origin master
 ```
 
-Добавить на сервисе **GitHub** в репозитории **lab02** файл **.gitignore**
+Добавляем на сервисе **GitHub** в репозитории **lab02** файл **.gitignore**
 со следующем содержимом:
-
 ```sh
 *build*/
 *install*/
 *.swp
 .idea/
 ```
-
+Собираем все изменения, которые появились на GitHub и обновляем локальную копию. Далее смотрим историю коммитов
 ```sh
 $ git pull origin master
 $ git log
 ```
+Создаем структуру:
+lab02/
 
+├── sources/
+
+├── include/
+
+├── examples/
+
+└── README.md
 ```sh
 $ mkdir sources
 $ mkdir include
 $ mkdir examples
+```
+Далее создаем реализацию функций
+```sh
 $ cat > sources/print.cpp <<EOF
 #include <print.hpp>
 
@@ -80,7 +115,7 @@ void print(const std::string& text, std::ofstream& out)
 }
 EOF
 ```
-
+И затем собственно сам код на С++
 ```sh
 $ cat > include/print.hpp <<EOF
 #include <fstream>
@@ -91,7 +126,7 @@ void print(const std::string& text, std::ofstream& out);
 void print(const std::string& text, std::ostream& out = std::cout);
 EOF
 ```
-
+Создаем функцию для вывода в консоль
 ```sh
 $ cat > examples/example1.cpp <<EOF
 #include <print.hpp>
@@ -102,7 +137,7 @@ int main(int argc, char** argv)
 }
 EOF
 ```
-
+Код для вывода в файл
 ```sh
 $ cat > examples/example2.cpp <<EOF
 #include <print.hpp>
@@ -116,20 +151,18 @@ int main(int argc, char** argv)
 }
 EOF
 ```
-
+Редактируем README.md
 ```sh
 $ edit README.md
 ```
-
+Проверка и коммит
 ```sh
 $ git status
 $ git add .
 $ git commit -m"added sources"
 $ git push origin master
 ```
-
-## Report
-
+Создаем папку с копией лабораторной работы, редайктируем его в редакторе и отправляем.
 ```sh
 $ cd ~/workspace/
 $ export LAB_NUMBER=02
@@ -229,7 +262,7 @@ int main() {
 }
 EOF
 ```
-7. Закоммитbv новую версию программы. Почему не надо добавлять файл повторно `git add`?
+7. Закоммитим новую версию программы. Почему не надо добавлять файл повторно `git add`?
 ```sh
 git commit -am "Code with UserName"
 [main a036d27] Code with UserName
@@ -347,7 +380,7 @@ To https://github.com/ziatdinovamir/lab02-part1.git
 branch 'patch1' set up to track 'origin/patch1'.
 ```
 
-4. Проверьте, что ветка `patch1` доступна в удалёный репозитории.
+4. Проверим, что ветка `patch1` доступна в удалёный репозитории.
 ```sh
 git branch -r
 ```
@@ -432,6 +465,8 @@ int main() {
 ```
 9. В удалённом репозитории выполним слияние PR `patch1 -> main` и удаляем ветку `patch1` в удаленном репозитории.
 10. Локально выполняем **pull**.
+
+Переключаемся в main
 ```sh
 git checkout main
 ```
@@ -439,6 +474,7 @@ git checkout main
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
 ```
+И выполняем **pull**
 ```sh
 git pull origin main 
 ```
@@ -501,7 +537,7 @@ Date:   Tue Mar 3 10:47:36 2026 +0300
     first commit
 (END)
 ```
-12. Удалите локальную ветку `patch1`.
+12. Удаляем локальную ветку `patch1`.
 ```sh
 git branch -d patch1
 ```
@@ -517,7 +553,7 @@ Deleted branch patch1 (was 9af7d15
 ```sh
 git checkout -b patch2
 ```
-2. Измениv *code style* с помощью утилиты [**clang-format**], используя `-style=Mozilla`.
+2. Изменим *code style* с помощью утилиты [**clang-format**], используя `-style=Mozilla`.
 ```sh
 sudo apt install clang-format
 ```
@@ -571,7 +607,7 @@ main()
 ```
 Как видно, всё получилось
 
-3. **commit**, **push**, создайте pull-request `patch2 -> master`.
+3. **commit**, **push**, создаем pull-request `patch2 -> master`.
 Закоммитим 
 ```sh
 git commit -am "Apply Mozilla code style"
@@ -602,7 +638,7 @@ branch 'patch2' set up to track 'origin/patch2'.
 ```
 И создаем pull-request
 
-4. В ветке **master** в удаленном репозитории измените комментарии, например, расставьте знаки препинания, переведите комментарии на другой язык.
+4. В ветке **master** в удаленном репозитории изменим комментарии, добавив :)))))
 Переключаемся на main
 ```sh
 git checkout main
@@ -645,9 +681,9 @@ remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/ziatdinovamir/lab02-part1.git
    385b6c2..0150834  main -> main
 ```
-5. Убедитесь, что в pull-request появились *конфликтны*.
+5. Убедимся, что в pull-request появились *конфликтны*.
 Видим сообщение: **This branch has conflicts that must be resolved**
-6. Для этого локально выполните **pull** + **rebase**. **Исправьте конфликты**.
+6. Для этого локально выполним **pull** + **rebase**. **Исправим конфликты**.
 Переключаемся на patch2
 ```sh
 git checkout patch2
@@ -683,7 +719,7 @@ nano hello_world.cpp
 ```
 Отредактируем наш код
 
-7. Сделайте *force push* в ветку `patch2`
+7. Сделаем *force push* в ветку `patch2`
 Завершаем коммит
 ```sh
 git add hello_world.cpp
@@ -712,5 +748,5 @@ Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
 To https://github.com/ziatdinovamir/lab02-part1.git
  + ce753f4...0e43bf6 patch2 -> patch2 (forced update)
 ```
-8. Убеждаемсяь, что в pull-request пропали конфликты и видим надпись :**No conflicts with base branch** 
+8. Убеждаемся, что в pull-request пропали конфликты и видим надпись :**No conflicts with base branch** 
 9. В удалённом репозитории выполним слияние PR `patch2 -> main` и удаляем ветку `patch1` в удаленном репозитории.
