@@ -750,3 +750,4 @@ To https://github.com/ziatdinovamir/lab02-part1.git
 ```
 8. Убеждаемся, что в pull-request пропали конфликты и видим надпись :**No conflicts with base branch** 
 9. В удалённом репозитории выполним слияние PR `patch2 -> main` и удаляем ветку `patch1` в удаленном репозитории.
+# lab03
