@@ -192,6 +192,7 @@ $ gist REPORT.md
 ```sh
 mkdir -p formatter_lib formatter_ex_lib hello_world solver solver/solver_lib
 ```
+```sh
 projects/
 
 ├── formatter_lib/
@@ -203,7 +204,7 @@ projects/
 └── solver/ 
 
     └── solver_lib/  
-
+```
 Создаем `CMakeLists.txt` в папке `formatter_lib`, а так же основной и заголовочные файлы
 ```sh
 cd ~/ziatdinovamir/workspace/projects/formatter_lib
@@ -569,5 +570,12 @@ _build/solver
 1 -3 2
 ```
 И наблюдаем прекрасный результат
+```sh
+-------------------
+=== x1 = 1.000000 ===
+-------------------
 
-
+-------------------
+=== x2 = 2.000000 ===
+-------------------
+```
