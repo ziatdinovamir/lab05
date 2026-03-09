@@ -8,6 +8,7 @@ $ open https://cmake.org/
 
 ## Tutorial
 
+Подготовка окружения 
 ```sh
 $ export GITHUB_USERNAME=<имя_пользователя>
 ```
@@ -18,25 +19,52 @@ $ pushd .
 $ source scripts/activate
 ```
 
+Клонирование кода из репозитория lab02 в папку projects/lab03
 ```sh
 $ git clone https://github.com/${GITHUB_USERNAME}/lab02.git projects/lab03
+```
+```sh
+Cloning into 'projects/lab03'...
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+remote: Compressing objects: 100% (21/21), done.
+remote: Total 25 (delta 6), reused 9 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (25/25), 12.69 KiB | 282.00 KiB/s, done.
+Resolving deltas: 100% (6/6), done.
+```
+Видим, что прошло успешно
+
+Затем идет удаление привязки к старому репозиторию и добавление этой к привязки к новому
+```sh
 $ cd projects/lab03
 $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git
 ```
-
+Далее компилируем файл библиотеки sources/print.cpp в объектный файл
 ```sh
 $ g++ -std=c++11 -I./include -c sources/print.cpp
 $ ls print.o
+```
+Смотрим список символов (в объектном файле и фильтруем (grep), чтобы найти функцию print.
+```sh
 $ nm print.o | grep print
+```
+```sh
+0000000000000000 T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSo
+000000000000002a T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSt14basic_ofstreamIcS2_E
+```
+```sh
 $ ar rvs print.a print.o
 $ file print.a
+```
+Компиляция и запуск первого примера
+```sh
 $ g++ -std=c++11 -I./include -c examples/example1.cpp
 $ ls example1.o
 $ g++ example1.o print.a -o example1
 $ ./example1 && echo
 ```
-
+Видим `hello` , значит все прошло успешно
 ```sh
 $ g++ -std=c++11 -I./include -c examples/example2.cpp
 $ nm example2.o
@@ -44,14 +72,16 @@ $ g++ example2.o print.a -o example2
 $ ./example2
 $ cat log.txt && echo
 ```
+Также видим `hello`
 
+Далее выполняем очистку. При этом даляются все файлы, созданные вручную и остается только исходный код
 ```sh
 $ rm -rf example1.o example2.o print.o
 $ rm -rf print.a
 $ rm -rf example1 example2
 $ rm -rf log.txt
 ```
-
+Создание CMakeLists.txt
 ```sh
 $ cat > CMakeLists.txt <<EOF
 cmake_minimum_required(VERSION 3.4)
@@ -77,12 +107,12 @@ $ cat >> CMakeLists.txt <<EOF
 include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/include)
 EOF
 ```
-
+И сборка 
 ```sh
 $ cmake -H. -B_build
 $ cmake --build _build
 ```
-
+В CMakeLists.txt добавляются инструкции по созданию двух исполняемых файлов (example1 и example2)
 ```sh
 $ cat >> CMakeLists.txt <<EOF
 
@@ -98,7 +128,7 @@ target_link_libraries(example1 print)
 target_link_libraries(example2 print)
 EOF
 ```
-
+Финальная сборка и тестирование через CMake
 ```sh
 $ cmake --build _build
 $ cmake --build _build --target print
@@ -115,20 +145,20 @@ $ cat log.txt && echo
 hello
 $ rm -rf log.txt
 ```
-
+Замена на CMake-файл из лабораторной работы
 ```sh
 $ git clone https://github.com/tp-labs/lab03 tmp
 $ mv -f tmp/CMakeLists.txt .
 $ rm -rf tmp
 ```
-
+Установка проекта 
 ```sh
 $ cat CMakeLists.txt
 $ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
 $ cmake --build _build --target install
 $ tree _install
 ```
-
+Сохранение результата в Git
 ```sh
 $ git add CMakeLists.txt
 $ git commit -m"added CMakeLists.txt"
@@ -157,6 +187,7 @@ $ gist REPORT.md
 В этой директории находятся файлы для статической библиотеки *formatter*.
 Создайте `CMakeList.txt` в директории [formatter_lib](formatter_lib),
 с помощью которого можно будет собирать статическую библиотеку *formatter*.
+
 
 ### Задание 2
 У компании "Formatter Inc." есть перспективная библиотека,
