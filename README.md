@@ -258,3 +258,7 @@ Build success
 [![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?token=F7dmjxSRNLcRTbHkuMDh&branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
 >>>>>>> 16d416fa09d8f9e67b2bf2ee22205c84f1782122
 # CI/CD Pipeline
+
+## CI Status
+
+![CI](https://github.com/ziatdinovamir/lab04/actions/workflows/ci.yml/badge.svg)
