@@ -254,6 +254,9 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 Discovering tests...OK
 Build success
 ```
+
+Но так как travis платный, используем GitHub actions. Во вкладке actions видим, что сборка прошла успешно
+
 [![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?token=F7dmjxSRNLcRTbHkuMDh&branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
 >>>>>>> 16d416fa09d8f9e67b2bf2ee22205c84f1782122
 # CI/CD Pipeline
