@@ -1,3 +1,4 @@
+<фрагмент_вставки_значка>
 [![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
 
 Laboratory work III
