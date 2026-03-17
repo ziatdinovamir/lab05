@@ -1,48 +1,14 @@
 language: cpp
-os: linux
-
-matrix:
-  include:
-    - name: "Linux / GCC"
-      compiler: gcc
-      env:
-        - COMPILER=gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-9
-            - cmake
-
-    - name: "Linux / Clang"
-      compiler: clang
-      env:
-        - COMPILER=clang
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-bionic-9
-            - ubuntu-toolchain-r-test
-          packages:
-            - clang-9
-            - cmake
-
-install:
-  - if [ "$COMPILER" = "clang" ]; then export CC=clang-9 CXX=clang++-9; fi
-  - echo "Using CC=${CC} and CXX=${CXX}"
-  - ${CXX} --version
-  - cmake --version
-
-before_script:
-  - mkdir -p build && cd build
 
 script:
-  - cmake -DCMAKE_BUILD_TYPE=Release ..
-  - cmake --build . --parallel
-  - cd ..
+- cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
+- cmake --build _build
+- cmake --build _build --target install
 
-notifications:
-  email:
-    on_success: change
-    on_failure: always
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake
+      - cmake-data
