@@ -1,5 +1,6 @@
-<фрагмент_вставки_значка>
-## Laboratory work III
+[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
+
+Laboratory work III
 
 Данная лабораторная работа посвещена изучению систем автоматизации сборки проекта на примере **CMake**
 
@@ -580,3 +581,6 @@ _build/solver
 === x2 = 2.000000 ===
 -------------------
 ```
+=======
+[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?token=F7dmjxSRNLcRTbHkuMDh&branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
+>>>>>>> 16d416fa09d8f9e67b2bf2ee22205c84f1782122
