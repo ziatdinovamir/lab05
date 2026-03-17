@@ -1,0 +1,46 @@
+# Версия образа Visual Studio
+image: Visual Studio 2019
+
+# Ветки для сборки
+branches:
+  only:
+    - main
+    - master
+
+# Конфигурации сборки
+configuration:
+  - Debug
+  - Release
+
+# Платформы
+platform:
+  - Win32
+  - x64
+
+# Матрица сборки
+matrix:
+  fast_finish: true
+
+# Кэширование
+cache:
+  - C:\Tools\vcpkg\installed\
+
+# Установка зависимостей
+install:
+  - set PATH=C:\Program Files\CMake\bin;%PATH%
+  - cmake --version
+
+# Подготовка к сборке
+before_build:
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=%CONFIGURATION%
+
+# Сборка
+build_script:
+  - cmake --build . --config %CONFIGURATION% --parallel
+
+# Тестирование (пока закомментировано)
+# test_script:
+#   - ctest -C %CONFIGURATION% --output-on-failure
+#   - cd ..
