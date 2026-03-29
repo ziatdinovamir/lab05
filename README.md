@@ -188,11 +188,8 @@ EOF
 
 cat > appveyor.yml << 'EOF'
 image: Visual Studio 2019
-
 build_script:
-  - cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
-  - cmake --build _build
-  - cmake --build _build --target install
+- for /d %%i in (formatter_lib formatter_ex_lib hello_world solver) do (cd %%i && mkdir build && cd build && cmake .. && cmake --build . && cd ..\..)
 EOF
 ```
 После чего коммитим и пушим каждый из файлов:
