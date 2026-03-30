@@ -1,3 +1,21 @@
+version: 1.0.{build}
 image: Visual Studio 2019
+
+platform:
+  - x64
+  - Win32
+
+configuration:
+  - Debug
+  - Release
+
+matrix:
+  fast_finish: true
+
 build_script:
-- for /d %%i in (formatter_lib formatter_ex_lib hello_world solver) do (cd %%i && mkdir build && cd build && cmake .. && cmake --build . && cd ..\..)
+  - cmake -B build -DCMAKE_BUILD_TYPE=%CONFIGURATION%
+  - cmake --build build --config %CONFIGURATION%
+
+test_script:
+  - .\build\hello_world\%CONFIGURATION%\hello_world.exe
+  - echo 1 -3 2 | .\build\solver\%CONFIGURATION%\solver.exe
