@@ -27,8 +27,6 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DBUILD_TESTS=ON
-        # Если нужно использовать MinGW:
-        # cmake -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DBUILD_TESTS=ON
     
     - name: Build (Linux)
       if: runner.os == 'Linux'
@@ -50,7 +48,6 @@ jobs:
       working-directory: build
       run: |
         ctest -C ${{ matrix.build_type }} --output-on-failure
-        # Пробуем разные возможные пути
         if (Test-Path "check.exe") { ./check.exe }
         elseif (Test-Path "${{ matrix.build_type }}/check.exe") { ./${{ matrix.build_type }}/check.exe }
         else { Write-Host "Check executable not found" }
