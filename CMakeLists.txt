@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTS "Build tests" OFF)
 
-add_library(print STATIC src/print.cpp)
+add_library(print STATIC sources/print.cpp)
 target_include_directories(print PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
