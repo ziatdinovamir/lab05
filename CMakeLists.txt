@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_EXAMPLES "Build examples" OFF)
-option(BUILD_TESTS "BUILD_TESTS" OFF)
+option(BUILD_TESTS "Build tests" OFF)
 
 add_library(print STATIC sources/print.cpp)
 
@@ -21,13 +21,12 @@ endif()
 if(BUILD_TESTS)
     enable_testing()
     
-    find_package(Threads REQUIRED) # Иногда это помогает gtest найти зависимости
+    if(MSVC)
+        set_property(TARGET gtest PROPERTY COMPILE_FLAGS "/MDd")
+        set_property(TARGET gtest_main PROPERTY COMPILE_FLAGS "/MDd")
+    endif()
     
     add_subdirectory(third-party/gtest)
-    
-    set_property(TARGET gtest PROPERTY CXX_STANDARD 17)
-    set_property(TARGET gtest PROPERTY CXX_STANDARD_REQUIRED ON)
-    set_property(TARGET gtest PROPERTY COMPILE_FLAGS "/MDd")
     
     add_executable(check tests/test1.cpp)
     target_link_libraries(check print gtest_main)
