@@ -7,19 +7,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_TESTS "Build tests" OFF)
 
-# Создаем библиотеку print
 add_library(print STATIC src/print.cpp)
 target_include_directories(print PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-# Примеры (опционально)
 if(BUILD_EXAMPLES)
     add_executable(example examples/example1.cpp)
     target_link_libraries(example print)
 endif()
 
-# Тесты
 if(BUILD_TESTS)
     enable_testing()
     
