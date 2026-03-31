@@ -1,5 +1,5 @@
 <фрагмент_вставки_значка>
-[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
+[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab05.svg?branch=main)](https://app.travis-ci.com/ziatdinovamir/lab05)
 
 ## Laboratory work IV
 
@@ -42,12 +42,12 @@ $ rvm install ruby-2.4.2
 $ rvm use 2.4.2 --default
 $ gem install travis
 ```
-Подготавливаем репозитори1 lab04, клонируя lab03
+Подготавливаем репозитори1 lab05, клонируя lab03
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab04
-$ cd projects/lab04
+$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab05
+$ cd projects/lab05
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
 ```
 Создаем `.travis.yml`
 ```sh
@@ -121,7 +121,7 @@ $ travis sync
 ```sh
 $ travis repos
 ```
-Включаем текущий репозиторий (lab04) в Travis CI
+Включаем текущий репозиторий (lab05) в Travis CI
 ```sh
 $ travis enable
 ```
@@ -167,7 +167,7 @@ $ gist REPORT.md
 
 Для этого в корне репозитория создаем `.travis.yml` и `appveyor.yml`. 
 ```sh
-cd ~/ziatdinovamir/workspace/projects/lab04
+cd ~/ziatdinovamir/workspace/projects/lab05
 
 cat > .travis.yml << 'EOF'
 language: cpp
@@ -209,7 +209,7 @@ git push origin main
 После всех операций запускается сборка. Как видим все прошло успешно.
 ```sh
 Build started
-git clone -q --branch=main https://github.com/ziatdinovamir/lab04.git C:\projects\lab04-8hi7m
+git clone -q --branch=main https://github.com/ziatdinovamir/lab05.git C:\projects\lab05-8hi7m
 git checkout -qf 54270f192b15f78808e3bb48a2f3619a495d8ae4
 cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
 -- Building for: Visual Studio 16 2019
@@ -228,33 +228,37 @@ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
 -- Detecting CXX compile features - done
 -- Configuring done (39.6s)
 -- Generating done (0.0s)
--- Build files have been written to: C:/projects/lab04-8hi7m/_build
+-- Build files have been written to: C:/projects/lab05-8hi7m/_build
 cmake --build _build
 Microsoft (R) Build Engine version 16.11.6+a918ceb31 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
   1>Checking Build System
-  Building Custom Rule C:/projects/lab04-8hi7m/CMakeLists.txt
+  Building Custom Rule C:/projects/lab05-8hi7m/CMakeLists.txt
   print.cpp
-  print.vcxproj -> C:\projects\lab04-8hi7m\_build\Debug\print.lib
-  Building Custom Rule C:/projects/lab04-8hi7m/CMakeLists.txt
+  print.vcxproj -> C:\projects\lab05-8hi7m\_build\Debug\print.lib
+  Building Custom Rule C:/projects/lab05-8hi7m/CMakeLists.txt
 cmake --build _build --target install
 Microsoft (R) Build Engine version 16.11.6+a918ceb31 for .NET Framework
 Copyright (C) Microsoft Corporation. All rights reserved.
-  print.vcxproj -> C:\projects\lab04-8hi7m\_build\Debug\print.lib
+  print.vcxproj -> C:\projects\lab05-8hi7m\_build\Debug\print.lib
   1>
   -- Install configuration: "Debug"
-  -- Installing: C:/projects/lab04-8hi7m/_install/lib/print.lib
-  -- Installing: C:/projects/lab04-8hi7m/_install/include
-  -- Installing: C:/projects/lab04-8hi7m/_install/include/print.hpp
-  -- Installing: C:/projects/lab04-8hi7m/_install/cmake/print-config.cmake
-  -- Installing: C:/projects/lab04-8hi7m/_install/cmake/print-config-debug.cmake
+  -- Installing: C:/projects/lab05-8hi7m/_install/lib/print.lib
+  -- Installing: C:/projects/lab05-8hi7m/_install/include
+  -- Installing: C:/projects/lab05-8hi7m/_install/include/print.hpp
+  -- Installing: C:/projects/lab05-8hi7m/_install/cmake/print-config.cmake
+  -- Installing: C:/projects/lab05-8hi7m/_install/cmake/print-config-debug.cmake
 Discovering tests...OK
 Build success
 ```
 
 Но так как travis платный, используем GitHub actions. Во вкладке actions видим, что сборка прошла успешно
 
-[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab04.svg?token=F7dmjxSRNLcRTbHkuMDh&branch=main)](https://app.travis-ci.com/ziatdinovamir/lab04)
+[![Build Status](https://app.travis-ci.com/ziatdinovamir/lab05.svg?token=F7dmjxSRNLcRTbHkuMDh&branch=main)](https://app.travis-ci.com/ziatdinovamir/lab05)
 >>>>>>> 16d416fa09d8f9e67b2bf2ee22205c84f1782122
 # CI/CD Pipeline
 # lab05
+
+## Статус сборки
+
+![CI](https://github.com/ziatdinovamir/lab05/actions/workflows/ci.yml/badge.svg)
