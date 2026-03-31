@@ -20,11 +20,8 @@ endif()
 
 if(BUILD_TESTS)
     enable_testing()
-    
-    if(MSVC)
-        set(GTEST_FORCE_SHARED_CRT_FLAG "$<$<CONFIG:Debug>:/MDd>$<$<CONFIG:Release>:/MD>")
-        set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
-    endif()
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}" CACHE STRING "" FORCE)
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}" CACHE STRING "" FORCE)
     
     add_subdirectory(third-party/gtest)
 
