@@ -19,11 +19,9 @@ endif()
 
 if(BUILD_TESTS)
     enable_testing()
-    
-    # Добавляем GoogleTest из подмодуля
+
     add_subdirectory(third-party/gtest)
-    
-    # Добавляем тесты
+
     file(GLOB TEST_SOURCES tests/*.cpp)
     add_executable(check ${TEST_SOURCES})
     target_link_libraries(check print gtest_main)
