@@ -20,16 +20,17 @@ endif()
 
 if(BUILD_TESTS)
     enable_testing()
-    
+
+    add_library(gtest_force_shared_crt INTERFACE)
     if(MSVC)
-        set_property(TARGET gtest PROPERTY COMPILE_FLAGS "/MDd")
-        set_property(TARGET gtest_main PROPERTY COMPILE_FLAGS "/MDd")
+        target_compile_options(gtest_force_shared_crt INTERFACE "/MDd")
     endif()
     
     add_subdirectory(third-party/gtest)
     
     add_executable(check tests/test1.cpp)
-    target_link_libraries(check print gtest_main)
+
+    target_link_libraries(check print gtest_main gtest_force_shared_crt)
     
     target_include_directories(check PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
     
