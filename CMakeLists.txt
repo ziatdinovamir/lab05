@@ -21,10 +21,13 @@ endif()
 if(BUILD_TESTS)
     enable_testing()
     
-    set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
+    if(MSVC)
+        set(GTEST_FORCE_SHARED_CRT_FLAG "$<$<CONFIG:Debug>:/MDd>$<$<CONFIG:Release>:/MD>")
+        set(GTEST_FORCE_SHARED_CRT ON CACHE BOOL "" FORCE)
+    endif()
     
     add_subdirectory(third-party/gtest)
-    
+
     add_executable(check tests/test1.cpp)
     target_link_libraries(check print gtest_main)
     
