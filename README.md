@@ -340,3 +340,4 @@ $ cd reports/lab${LAB_NUMBER}
 $ edit REPORT.md
 $ gist REPORT.md
 ```
+# lab06
